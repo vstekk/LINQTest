@@ -36,16 +36,16 @@ namespace LINQTest
                 do
                 {
                     Console.WriteLine("\nWhat do you want to do?");
-                    Console.WriteLine("[1] to sort alphabetically");
-                    Console.WriteLine("[2] to sort by length");
-                    Console.WriteLine("[3] to filter out words shorter than a number");
-                    Console.WriteLine("[4] to filter out words longer than a number");
-                    Console.WriteLine("[5] to add more words to your list");
-                    Console.WriteLine("[6] to reset your list and start all over");
-                    Console.WriteLine("[e] to exit this tremendous app");
+                    Console.WriteLine("[1] Sort alphabetically");
+                    Console.WriteLine("[2] Sort by length");
+                    Console.WriteLine("[3] Filter out words shorter than a number");
+                    Console.WriteLine("[4] Filter out words longer than a number");
+                    Console.WriteLine("[5] Add new lines");
+                    Console.WriteLine("[6] Delete the list");
+                    Console.WriteLine("[e] Exit");
 
                     response = Console.ReadKey(true).Key;
-                    Console.WriteLine($"\nIn your infinite wisdom you have chosen " + response + ".");
+                    Console.WriteLine($"\nSelected option: " + response + ".");
                 } while (response != ConsoleKey.E 
                         && response != ConsoleKey.D1 
                         && response != ConsoleKey.D2 
@@ -87,6 +87,7 @@ namespace LINQTest
         }
         private void ReadFile()
         {
+            inputList.Clear();
             try
             {
                 using (var sr = new StreamReader(filePath))
@@ -129,18 +130,14 @@ namespace LINQTest
                 ConfirmChoice();
                 if (confirmation == true)
                 {
-                    inputList = inputList.Concat(newList).ToList();
+                    System.IO.File.AppendAllLines(filePath, newList);
                 } 
             }
             OperationSelector();
         }
         private void OverwriteList()
         {
-            inputList.Clear();
-            foreach (string i in newList)
-                {
-                    inputList.Add(i);
-                }
+            System.IO.File.WriteAllLines(filePath, newList);
         }
         private void SaveChanges()
         {
@@ -180,7 +177,7 @@ namespace LINQTest
                 where i.Length < letters
                 select i;
             newList = sorted.ToList();
-            Console.WriteLine($"\nThese words are shorter than " + letters + ".");
+            Console.WriteLine($"\nThese words are shorter than " + letters + ":");
             PrintList(sorted);
         }
         private void LongerThan()
@@ -191,17 +188,18 @@ namespace LINQTest
                 where i.Length > letters
                 select i;
             newList = sorted.ToList();
-            Console.WriteLine($"\nThese words are longer than " + letters + ".");
+            Console.WriteLine($"\nThese words are longer than " + letters + ":");
             PrintList(sorted);
         }
         private void StartOver()
         {
-            Console.Write("Are you sure you want to empty your list? ");
+            Console.Write("\nAre you sure you want to empty your list? ");
             ConfirmChoice();
             if (confirmation == true)
             {
                 hasEnough = false;
-                inputList.Clear();
+                newList.Clear();
+                OverwriteList();
                 Console.WriteLine("\nYour list is now empty.");
                 AddItemsToList();
             } else {
