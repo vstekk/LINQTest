@@ -42,7 +42,13 @@ namespace LINQTest
 
                     response = Console.ReadKey(true).Key;
                     Console.WriteLine($"\nIn your infinite wisdom you have chosen " + response + ".");
-                } while (response != ConsoleKey.E && response != ConsoleKey.D1 && response != ConsoleKey.D2 && response != ConsoleKey.D3 && response != ConsoleKey.D4 && response != ConsoleKey.D5 && response != ConsoleKey.D6);
+                } while (response != ConsoleKey.E 
+                        && response != ConsoleKey.D1 
+                        && response != ConsoleKey.D2 
+                        && response != ConsoleKey.D3 
+                        && response != ConsoleKey.D4 
+                        && response != ConsoleKey.D5 
+                        && response != ConsoleKey.D6);
                 
                 if (response == ConsoleKey.D1)
                 {
