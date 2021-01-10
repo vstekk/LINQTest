@@ -1,0 +1,16 @@
+F:\MyApps\LINQTest\bin\Debug\net5.0\LINQTest.exe
+F:\MyApps\LINQTest\bin\Debug\net5.0\LINQTest.deps.json
+F:\MyApps\LINQTest\bin\Debug\net5.0\LINQTest.runtimeconfig.json
+F:\MyApps\LINQTest\bin\Debug\net5.0\LINQTest.runtimeconfig.dev.json
+F:\MyApps\LINQTest\bin\Debug\net5.0\LINQTest.dll
+F:\MyApps\LINQTest\bin\Debug\net5.0\ref\LINQTest.dll
+F:\MyApps\LINQTest\bin\Debug\net5.0\LINQTest.pdb
+F:\MyApps\LINQTest\obj\Debug\net5.0\LINQTest.csprojAssemblyReference.cache
+F:\MyApps\LINQTest\obj\Debug\net5.0\LINQTest.GeneratedMSBuildEditorConfig.editorconfig
+F:\MyApps\LINQTest\obj\Debug\net5.0\LINQTest.AssemblyInfoInputs.cache
+F:\MyApps\LINQTest\obj\Debug\net5.0\LINQTest.AssemblyInfo.cs
+F:\MyApps\LINQTest\obj\Debug\net5.0\LINQTest.csproj.CoreCompileInputs.cache
+F:\MyApps\LINQTest\obj\Debug\net5.0\LINQTest.dll
+F:\MyApps\LINQTest\obj\Debug\net5.0\ref\LINQTest.dll
+F:\MyApps\LINQTest\obj\Debug\net5.0\LINQTest.pdb
+F:\MyApps\LINQTest\obj\Debug\net5.0\LINQTest.genruntimeconfig.cache
