@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 namespace LINQTest
 {
     class Program
     {
+        string filePath = @"obj\list.txt";
         List<string> inputList = new List<string>();
         List<string> newList = new List<string>();
         bool hasEnough = false;
@@ -16,11 +18,13 @@ namespace LINQTest
             var program = new Program();
             Console.Clear();
             Console.WriteLine("Hi. Welcome to this groundbreaking experience.");
+            
             program.OperationSelector();
             Console.WriteLine("\nBye bye baby.\n");        
         }
         private void OperationSelector()
         {
+            ReadFile();
             if (inputList.Count == 0)
             {
                 AddItemsToList();
@@ -80,6 +84,24 @@ namespace LINQTest
                     StartOver();
                 }
             }
+        }
+        private void ReadFile()
+        {
+            try
+            {
+                using (var sr = new StreamReader(filePath))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        inputList.Add(line);
+                    }
+                }
+            } catch (Exception e) {
+                Console.WriteLine("\nThe file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+
         }
         private void AddItemsToList()
         {
