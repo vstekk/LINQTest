@@ -54,34 +54,31 @@ namespace LINQTest
                         && response != ConsoleKey.D5 
                         && response != ConsoleKey.D6);
                 
-                if (response == ConsoleKey.D1)
+                switch (response)
                 {
-                    SortAlphabetically();
-                    SaveChanges();
-                } 
-                if (response == ConsoleKey.D2)
-                {
-                    SortByLength();
-                    SaveChanges();
-                } 
-                if (response == ConsoleKey.D3)
-                {
-                    ShorterThan();
-                    SaveChanges();
-                } 
-                if (response == ConsoleKey.D4)
-                {
-                    LongerThan();
-                    SaveChanges();
-                } 
-                if (response == ConsoleKey.D5)
-                {
-                    hasEnough = false;
-                    AddItemsToList();
-                }
-                if (response == ConsoleKey.D6)
-                {
-                    StartOver();
+                    case ConsoleKey.D1:
+                        SortAlphabetically();
+                        SaveChanges();
+                        break;
+                    case ConsoleKey.D2:
+                        SortByLength();
+                        SaveChanges();
+                        break;
+                    case ConsoleKey.D3:
+                        ShorterThan();
+                        SaveChanges();
+                        break;
+                    case ConsoleKey.D4:
+                        LongerThan();
+                        SaveChanges();
+                        break; 
+                    case ConsoleKey.D5:
+                        hasEnough = false;
+                        AddItemsToList();
+                        break;
+                    case ConsoleKey.D6:
+                        StartOver();
+                        break;
                 }
             }
         }
