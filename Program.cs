@@ -182,7 +182,7 @@ namespace LINQTest
         }
         private void ConfirmChoice()
         {
-            Console.Write(" [y/n] ");
+            Console.Write(" [y/n]  ");
             ConsoleKey response;
             do 
             {
