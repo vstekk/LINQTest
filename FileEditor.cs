@@ -20,10 +20,11 @@ namespace LINQTest
         {
             while (exit == false) 
             {
+                graphics.Header("list editor");
                 utils.ReadFile();
                 if (utils.currentList.Count == 0)
                 {
-                    graphics.Underline("-", "Your list is empty.");
+                    graphics.Underline("-", "Your list is empty");
                 } else {
                     graphics.Underline("-", "This is your list:");
                     utils.PrintList(utils.currentList);
@@ -33,21 +34,20 @@ namespace LINQTest
         }
         private void MainMenu()
         {
+            Console.WriteLine();              
+            graphics.Bar(30, "=");
+            Console.WriteLine("[1] Add new lines");
+            Console.WriteLine("[2] Sort alphabetically");
+            Console.WriteLine("[3] Sort by length");
+            Console.WriteLine("[4] Items shorter than a number");
+            Console.WriteLine("[5] Items longer than a number");
+            Console.WriteLine("[6] Empty the list");
+            Console.WriteLine("[e] Exit");
+            graphics.Bar(30, "=");
             ConsoleKey response;
             do
             {   
-                Console.WriteLine();              
-                graphics.Underline("=", "What do you want to do?");
-                Console.WriteLine("[1] Add new lines");
-                Console.WriteLine("[2] Sort alphabetically");
-                Console.WriteLine("[3] Sort by length");
-                Console.WriteLine("[4] Filter out words shorter than a number");
-                Console.WriteLine("[5] Filter out words longer than a number");
-                Console.WriteLine("[6] Empty the list");
-                Console.WriteLine("[e] Exit");
-
-                response = Console.ReadKey(true).Key;
-                Console.WriteLine($"\nSelected option: " + response + ".");
+                response = Console.ReadKey(false).Key;
             } while (response != ConsoleKey.E 
                     && response != ConsoleKey.D1 
                     && response != ConsoleKey.D2 
@@ -83,13 +83,26 @@ namespace LINQTest
                     utils.SaveChanges();
                     break;
                 case ConsoleKey.D6:
+                    Console.Clear();
                     utils.ClearList();
+                    utils.SaveChanges();
                     break;
                 case ConsoleKey.E:
-                    exit = true;
+                    Console.Clear();
+                    Exit();
                     break;
             }
             Console.Clear();
+        }
+        private void Exit() {
+            {
+                graphics.Header("leaving");
+                Console.Write("Are you sure you want to exit?");
+                if (utils.YesOrNoBlock())
+                {
+                    exit = true;
+                }
+            }
         }
     }
 }

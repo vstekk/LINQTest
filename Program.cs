@@ -16,8 +16,6 @@ namespace LINQTest
 
             Console.Clear();
 
-            program.graphics.Header("list editor");
-
             program.fileEditor.MainMenuLoader();
             
             program.graphics.Header("thank you for using me");        

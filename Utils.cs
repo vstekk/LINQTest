@@ -14,6 +14,7 @@ interface IUtils {
     void SortByLength();
     void ShorterThan();
     void LongerThan();
+    bool YesOrNoBlock();
     void PrintList(List<string> list);
 
 }
@@ -54,12 +55,10 @@ namespace LINQTest
         }
         public void ClearList()
         {
-            Console.Write("\nAre you sure? ");
-            if (YesOrNoBlock())
-            {                
-                newList.Clear();
-                OverwriteFile();
-            }
+            newList.Clear();
+            graphics.Header("clearing a list");
+            graphics.Underline("-", "You are going to clear your list:");
+            PrintList(currentList);
         }
         public void AddItems()
         {
@@ -113,24 +112,26 @@ namespace LINQTest
         }
         public void ShorterThan()
         {
+            graphics.Header("shorter than");
             InputNumber();
             IEnumerable<string> sorted =
                 from i in currentList
                 where i.Length < letters
                 select i;
             newList = sorted.ToList();
-            Console.WriteLine($"\nThese words are shorter than " + letters + ":");
+            graphics.Underline("-", $"\nThese words are shorter than " + letters + ":");
             PrintList(sorted);
         }
         public void LongerThan()
         {
+            graphics.Header("longer than");
             InputNumber();
             IEnumerable<string> sorted =
                 from i in currentList
                 where i.Length > letters
                 select i;
             newList = sorted.ToList();
-            Console.WriteLine($"\nThese words are longer than " + letters + ":");
+            graphics.Underline("-", $"\nThese words are longer than " + letters + ":");
             PrintList(sorted);
         }
         public void SaveChanges()
@@ -149,7 +150,7 @@ namespace LINQTest
         {
             System.IO.File.WriteAllLines(filePath, newList);
         }
-        private bool YesOrNoBlock()
+        public bool YesOrNoBlock()
         {
             Console.Write(" [y/n]  ");
             ConsoleKey response;
@@ -170,7 +171,7 @@ namespace LINQTest
             bool succesfull = false;
             do
             {
-                Console.Write("\nChoose a number: ");
+                Console.Write("Choose a number: ");
                 var input = Console.ReadLine();
                 if (int.TryParse(input, out int number))
                 {
