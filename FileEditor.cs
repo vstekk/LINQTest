@@ -1,40 +1,43 @@
 using System;
 
-interface IStateHandler {
-    void SwitchState();
+interface IFileEditor {
+    void MainMenuLoader();
 }
 
 namespace LINQTest
 {
-    class StateHandler : IStateHandler
+    class FileEditor : IFileEditor
     {
         IUtils utils;
+        IGraphics graphics;
         bool exit = false;
         
-        public StateHandler() {
+        public FileEditor() {
             utils = new Utils();
+            graphics = new Graphics();
         }
-        public void SwitchState()
+        public void MainMenuLoader()
         {
             while (exit == false) 
             {
                 utils.ReadFile();
                 if (utils.currentList.Count == 0)
                 {
-                    utils.AddItems();
+                    graphics.Underline("-", "Your list is empty.");
                 } else {
-                    Console.WriteLine("\nThis is your list");
+                    graphics.Underline("-", "This is your list:");
                     utils.PrintList(utils.currentList);
-                    MainMenu();    
                 }   
+                MainMenu();
             }   
         }
         private void MainMenu()
         {
             ConsoleKey response;
             do
-            {                    
-                Console.WriteLine("\nWhat do you want to do?");
+            {   
+                Console.WriteLine();              
+                graphics.Underline("=", "What do you want to do?");
                 Console.WriteLine("[1] Add new lines");
                 Console.WriteLine("[2] Sort alphabetically");
                 Console.WriteLine("[3] Sort by length");
@@ -56,31 +59,37 @@ namespace LINQTest
             switch (response)
             {
                 case ConsoleKey.D1:
+                    Console.Clear();
                     utils.AddItems();
                     break;
                 case ConsoleKey.D2:
+                    Console.Clear();
                     utils.SortAlphabetically();
                     utils.SaveChanges();
                     break;
                 case ConsoleKey.D3:
+                    Console.Clear();
                     utils.SortByLength();
                     utils.SaveChanges();
                     break;
                 case ConsoleKey.D4:
+                    Console.Clear();
                     utils.ShorterThan();
                     utils.SaveChanges();
                     break; 
                 case ConsoleKey.D5:
+                    Console.Clear();
                     utils.LongerThan();
                     utils.SaveChanges();
                     break;
                 case ConsoleKey.D6:
-                    utils.ClearFile();
+                    utils.ClearList();
                     break;
                 case ConsoleKey.E:
                     exit = true;
                     break;
             }
+            Console.Clear();
         }
     }
 }

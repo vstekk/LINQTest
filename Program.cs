@@ -4,9 +4,11 @@ namespace LINQTest
 {
     class Program
     {
-        IStateHandler stateHandler;
+        IFileEditor fileEditor;
+        IGraphics graphics;
         public Program() {
-            stateHandler = new StateHandler();
+            fileEditor = new FileEditor();
+            graphics = new Graphics();
         }
         static void Main()
         {
@@ -14,11 +16,11 @@ namespace LINQTest
 
             Console.Clear();
 
-            Console.WriteLine("Welcome.");
+            program.graphics.Header("list editor");
 
-            program.stateHandler.SwitchState();
+            program.fileEditor.MainMenuLoader();
             
-            Console.WriteLine("\nBye bye baby.\n");        
+            program.graphics.Header("thank you for using me");        
         }
     }
 }

@@ -7,7 +7,7 @@ interface IUtils {
     string filePath {get; set; }
     List<string> currentList {get; set; }
     void ReadFile();
-    void ClearFile();
+    void ClearList();
     void SaveChanges();
     void AddItems();
     void SortAlphabetically();
@@ -22,14 +22,14 @@ namespace LINQTest
 {
     class Utils : IUtils
     {
-        
+        IGraphics graphics;        
         public string filePath {get; set;}
         public List<string> currentList {get; set; }
         List<string> newList = new List<string>();
-        bool confirmation = false;
         int letters;
 
         public Utils() {
+            graphics = new Graphics();
             filePath = @"obj\list.txt";
             currentList = new List<string>();
 
@@ -52,62 +52,63 @@ namespace LINQTest
                 Console.WriteLine(e.Message);
             }
         }
-        public void ClearFile()
+        public void ClearList()
         {
             Console.Write("\nAre you sure? ");
-            YesOrNoBlock();
-            if (confirmation == true)
+            if (YesOrNoBlock())
             {                
                 newList.Clear();
                 OverwriteFile();
-                Console.WriteLine("\nYour list is now empty.");
             }
         }
         public void AddItems()
         {
             newList.Clear();
             bool hasEnough = false;
-            
+
+            graphics.Header("adding new lines");
             while (!hasEnough)
             {
                 Console.WriteLine("\nWrite a word:");
                 newList.Add(Console.ReadLine());
 
                 Console.Write("\nDo you want to add another word? ");
-                YesOrNoBlock();
-                if (confirmation == false)
+                if (!YesOrNoBlock())
                 {
                     hasEnough = true;
                 }
             }
-            Console.WriteLine("\nYou are going to add this to your list:");
+            Console.Clear();
+            graphics.Header("adding new lines");
+            Console.WriteLine("You are going to add this to your list:");
             PrintList(newList);
 
             Console.Write("\nAre you sure? ");
-            YesOrNoBlock();
-            if (confirmation == true)
+            if (YesOrNoBlock())
             {
                 AppendToFile();
             }
         }
         public void SortAlphabetically()
         {
+            graphics.Header("sorting alphabetically");
             IEnumerable<string> sorted = 
                 from i in currentList
                 orderby i
                 select i;
             newList = sorted.ToList();
-            Console.WriteLine("\nThis is your list sorted alphabetically:");
+            graphics.Underline("-", "This is your list sorted alphabetically:");
             PrintList(sorted);
         }
         public void SortByLength()
         {
+            graphics.Header("sorting by length");
             IEnumerable<string> sorted =
                 from i in currentList
                 orderby i.Length
                 select i;
             newList = sorted.ToList();
-            Console.WriteLine("\nThis is your list sorted by length:");
+            graphics.Underline("-", "This is your list sorted by length:");
             PrintList(sorted);
         }
         public void ShorterThan()
@@ -134,9 +135,8 @@ namespace LINQTest
         }
         public void SaveChanges()
         {
-            Console.Write("\nSave changes? ");
-            YesOrNoBlock();
-            if (confirmation == true)
+            Console.Write("\nSave changes? ");            
+            if (YesOrNoBlock())
             {
                 OverwriteFile();
             }
@@ -149,7 +149,7 @@ namespace LINQTest
         {
             System.IO.File.WriteAllLines(filePath, newList);
         }
-        private void YesOrNoBlock()
+        private bool YesOrNoBlock()
         {
             Console.Write(" [y/n]  ");
             ConsoleKey response;
@@ -157,13 +157,13 @@ namespace LINQTest
             {
                 response = Console.ReadKey(false).Key;
             } while (response != ConsoleKey.Y && response != ConsoleKey.N);
+            Console.WriteLine();
             if (response == ConsoleKey.Y) 
             {
-                confirmation = true;
+                return true;
             } else {
-                confirmation = false;
+                return false;
             }
-            Console.WriteLine();
         }
         private void InputNumber()
         {
