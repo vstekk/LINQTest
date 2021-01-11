@@ -21,6 +21,10 @@ namespace LINQTest
         }
         public void Underline(string character, string text)
         {
+            if (character.Length > 1)
+            {
+                character = character.Remove(1);
+            }
             Console.WriteLine(text);
             Bar(text.Length, character);
         }
