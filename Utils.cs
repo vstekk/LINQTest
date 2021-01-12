@@ -31,10 +31,11 @@ namespace LINQTest
 
         public Utils() {
             graphics = new Graphics();
-            filePath = @"obj\list.txt";
             currentList = new List<string>();
-
+            filePath = @"lists\dud.txt";
         }
+        
+        
         public void ReadFile()
         {
             currentList.Clear();
@@ -57,7 +58,7 @@ namespace LINQTest
         {
             newList.Clear();
             graphics.Header("clearing a list");
-            graphics.Underline("-", "You are going to clear your list:");
+            graphics.Underline("You are going to clear your list:");
             PrintList(currentList);
         }
         public void AddItems()
@@ -79,7 +80,7 @@ namespace LINQTest
             }
             Console.Clear();
             graphics.Header("adding new lines");
-            Console.WriteLine("You are going to add this to your list:");
+            graphics.Underline("You are going to add this to your list:");
             PrintList(newList);
 
             Console.Write("\nAre you sure? ");
@@ -96,7 +97,7 @@ namespace LINQTest
                 orderby i
                 select i;
             newList = sorted.ToList();
-            graphics.Underline("-", "This is your list sorted alphabetically:");
+            graphics.Underline("This is your list sorted alphabetically:");
             PrintList(sorted);
         }
         public void SortByLength()
@@ -107,7 +108,7 @@ namespace LINQTest
                 orderby i.Length
                 select i;
             newList = sorted.ToList();
-            graphics.Underline("-", "This is your list sorted by length:");
+            graphics.Underline("This is your list sorted by length:");
             PrintList(sorted);
         }
         public void ShorterThan()
@@ -119,7 +120,7 @@ namespace LINQTest
                 where i.Length < letters
                 select i;
             newList = sorted.ToList();
-            graphics.Underline("-", $"\nThese words are shorter than " + letters + ":");
+            graphics.Underline($"\nThese words are shorter than " + letters + ":");
             PrintList(sorted);
         }
         public void LongerThan()
@@ -131,7 +132,7 @@ namespace LINQTest
                 where i.Length > letters
                 select i;
             newList = sorted.ToList();
-            graphics.Underline("-", $"\nThese words are longer than " + letters + ":");
+            graphics.Underline($"\nThese words are longer than " + letters + ":");
             PrintList(sorted);
         }
         public void SaveChanges()
@@ -196,5 +197,6 @@ namespace LINQTest
                 Console.WriteLine(i);
             }
         }
+        
     }
 }

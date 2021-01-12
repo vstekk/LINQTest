@@ -4,10 +4,10 @@ namespace LINQTest
 {
     class Program
     {
-        IFileEditor fileEditor;
+        IFolderEditor folderEditor;
         IGraphics graphics;
         public Program() {
-            fileEditor = new FileEditor();
+            folderEditor = new FolderEditor();
             graphics = new Graphics();
         }
         static void Main()
@@ -16,7 +16,7 @@ namespace LINQTest
 
             Console.Clear();
 
-            program.fileEditor.MainMenuLoader();
+            program.folderEditor.FolderMenuLoader();
             
             program.graphics.Header("thank you for using me");        
         }

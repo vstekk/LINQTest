@@ -1,6 +1,7 @@
 using System;
 
-interface IFileEditor {
+interface IFileEditor 
+{
     void MainMenuLoader();
 }
 
@@ -18,15 +19,17 @@ namespace LINQTest
         }
         public void MainMenuLoader()
         {
+            Console.Clear();
+            exit = false;
             while (exit == false) 
             {
                 graphics.Header("list editor");
                 utils.ReadFile();
                 if (utils.currentList.Count == 0)
                 {
-                    graphics.Underline("-", "Your list is empty");
+                    graphics.Underline("Your list is empty");
                 } else {
-                    graphics.Underline("-", "This is your list:");
+                    graphics.Underline("This is your list:");
                     utils.PrintList(utils.currentList);
                 }   
                 MainMenu();
@@ -35,7 +38,7 @@ namespace LINQTest
         private void MainMenu()
         {
             Console.WriteLine();              
-            graphics.Bar(30, "=");
+            graphics.Bar(30, "-");
             Console.WriteLine("[1] Add new lines");
             Console.WriteLine("[2] Sort alphabetically");
             Console.WriteLine("[3] Sort by length");
@@ -89,20 +92,11 @@ namespace LINQTest
                     break;
                 case ConsoleKey.E:
                     Console.Clear();
-                    Exit();
+                    exit = true;
                     break;
             }
             Console.Clear();
         }
-        private void Exit() {
-            {
-                graphics.Header("leaving");
-                Console.Write("Are you sure you want to exit?");
-                if (utils.YesOrNoBlock())
-                {
-                    exit = true;
-                }
-            }
-        }
+        
     }
 }
